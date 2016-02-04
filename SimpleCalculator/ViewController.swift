@@ -24,6 +24,18 @@ class ViewController: UIViewController {
     
     //---------------------
     //variables/constants
+    @IBOutlet weak var mainLabel: UILabel!
+    //first num
+    var firstNumStr: String = ""
+    //second num
+    var secondNumStr: String = ""
+    //operand string
+    var operSymbol: String  = ""
+    //bools
+    var isSecondNum: Bool = false //check for if on second of first number
+    var isBeginNum: Bool = true //check to see if it's first number to be added
+    var checkDec:Bool = false //check to see if decimal is in place
+    var isNeg: Bool = false //check to see if number is negative
     
     
     //---------------------
@@ -32,87 +44,176 @@ class ViewController: UIViewController {
     //add all the click actions for the buttons
     //clear the label and vairables
     @IBAction func ClearButt(sender: UIButton) {
+        //reset numbers to 0
+        firstNumStr = ""
+        secondNumStr = ""
+        
+        //reset bools
+        isSecondNum = false
+        isBeginNum = true
+        checkDec = false
+        isNeg = false
+        
+        //set label back to 0
+        mainLabel.text = "0"
     }
     
     //change a number to be positive or negative
     @IBAction func posNegChange(sender: UIButton) {
+        if(isNeg == true){
+            
+        }
     }
     
     //add 0 to the num variable
     @IBAction func numZero(sender: UIButton) {
+        append("0")
     }
     
     //add 1 to the num variable
     @IBAction func numOne(sender: UIButton) {
+        append("1")
     }
     
     //add 2 to the variable
     @IBAction func numTwo(sender: UIButton) {
+        append("2")
     }
     
     //add 3 to the variable
     @IBAction func numThree(sender: UIButton) {
+        append("3")
     }
     
     //add 4 to the variable
     @IBAction func numFour(sender: UIButton) {
+        append("4")
     }
     
     //add 5 to the variable
     @IBAction func numFive(sender: UIButton) {
+        append("5")
     }
     
     //add 6 to the variable
     @IBAction func numSix(sender: UIButton) {
+        append("6")
     }
     
     //add 7 to the variable
     @IBAction func numSeven(sender: UIButton) {
+        append("7")
     }
     
     //add 8 to the variable
     @IBAction func numEight(sender: UIButton) {
+        append("8")
     }
     
     //add 9 to the variable
     @IBAction func numNine(sender: UIButton) {
+        append("9")
     }
     
     //add in a decimal
     @IBAction func addDec(sender: UIButton) {
         //check if decimal exists
+        if(checkDec == false){
+            append(".")
+            checkDec = true
+        }
+        else{
+            
+        }
     }
     
     //get ready to divide
     @IBAction func divide(sender: UIButton) {
+        operSymbol = "/"
+        isSecondNum = true
+        isBeginNum = true
     }
     
     //get ready to multiply
     @IBAction func multiply(sender: UIButton) {
+        operSymbol = "*"
+        isSecondNum = true
+        isBeginNum = true
     }
     
     
     //get ready to subtract
     @IBAction func subtract(sender: UIButton) {
+        operSymbol = "-"
+        isSecondNum = true
+        isBeginNum = true
     }
     
     //get ready to add
     @IBAction func addition(sender: UIButton) {
+        operSymbol = "+"
+        isSecondNum = true
+        isBeginNum = true
     }
     
     //equals button has been pressed. Time to do the math
     @IBAction func doTheMath(sender: UIButton) {
+        //convert secondNumStr to float
+        let firstNum = (firstNumStr as NSString).floatValue
+        let secondNum = (secondNumStr as NSString).floatValue
+        var finalNum: float_t = 0
+        //do the math
+        if(operSymbol == "+"){
+            finalNum = firstNum + secondNum
+        }
+        else if(operSymbol == "-"){
+            finalNum = firstNum - secondNum
+        }
+        else if(operSymbol == "/"){
+            finalNum = firstNum / secondNum
+        }
+        else if(operSymbol == "*"){
+            finalNum = firstNum * secondNum
+        }
+        
+        //set label
+        mainLabel.text = String(finalNum)
+        
+        //reset bools
+        checkDec = false
+        isSecondNum = false
+        isBeginNum = true
+        isNeg = false
+        
+        //reset numbers just in case
+        firstNumStr = ""
+        secondNumStr = ""
     }
     
     //--------------------
     
     
+    //--------------------
+    //Functions
     
-    
-    
-    
-    
-    
+    //appends the number to make a full inputed number
+    func append(appn:Character){
+        if(isSecondNum == false){
+            if(isBeginNum == true){
+                mainLabel.text = ""
+            }
+            firstNumStr.append(appn)
+            mainLabel.text = firstNumStr
+            }
+        else{
+            if(isBeginNum == true){
+                mainLabel.text = ""
+            }
+            secondNumStr.append(appn)
+            mainLabel.text = secondNumStr
+            }
+        
+    }//end append function
     
     
     

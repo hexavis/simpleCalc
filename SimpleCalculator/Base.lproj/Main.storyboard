@@ -848,6 +848,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="mainLabel" destination="cea-VI-zWa" id="X1N-aU-3wI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
