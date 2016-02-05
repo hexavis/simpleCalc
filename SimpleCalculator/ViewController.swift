@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jacqueline Richard. All rights reserved.
 //  This app a simple calculator app that is suppose to allow the user to
 //  add, multiply, divide, and subtract two numbers.
-//
+// Built in WCompact HRegular
 
 import UIKit
 
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     //change a number to be positive or negative
     @IBAction func posNegChange(sender: UIButton) {
         if(isNeg == true){
-            //remove the - from the number
+            //remove the - from the number ==== not currently working =====
             if(isSecondNum == false){
                 firstNumStr = String(firstNumStr.characters.dropFirst())
             }
