@@ -61,7 +61,22 @@ class ViewController: UIViewController {
     //change a number to be positive or negative
     @IBAction func posNegChange(sender: UIButton) {
         if(isNeg == true){
-            
+            //remove the - from the number
+            if(isSecondNum == false){
+                firstNumStr = String(firstNumStr.characters.dropFirst())
+            }
+            else{
+                secondNumStr = String(secondNumStr.characters.dropFirst())
+            }
+        }
+        else{
+            //add the - to the number
+            if(isSecondNum == false){
+                firstNumStr = "-" + firstNumStr
+            }
+            else{
+                secondNumStr = "-" + secondNumStr
+            }
         }
     }
     
