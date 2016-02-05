@@ -11,12 +11,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     var isBeginNum: Bool = true //check to see if it's first number to be added
     var checkDec:Bool = false //check to see if decimal is in place
     var isNeg: Bool = false //check to see if number is negative
+    var isCalAgain = false //check to see if this is a second time an operator has been hit
     
     
     //---------------------
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
         isBeginNum = true
         checkDec = false
         isNeg = false
+        isCalAgain = false
         
         //set label back to 0
         mainLabel.text = "0"
@@ -73,9 +75,11 @@ class ViewController: UIViewController {
             //add the - to the number
             if(isSecondNum == false){
                 firstNumStr = "-" + firstNumStr
+                mainLabel.text = firstNumStr
             }
             else{
                 secondNumStr = "-" + secondNumStr
+                mainLabel.text = secondNumStr
             }
         }
     }
@@ -147,6 +151,8 @@ class ViewController: UIViewController {
         operSymbol = "/"
         isSecondNum = true
         isBeginNum = true
+        isCalAgain = true
+        isNeg = false
     }
     
     //get ready to multiply
@@ -154,6 +160,8 @@ class ViewController: UIViewController {
         operSymbol = "*"
         isSecondNum = true
         isBeginNum = true
+        isCalAgain = true
+        isNeg = false
     }
     
     
@@ -162,6 +170,8 @@ class ViewController: UIViewController {
         operSymbol = "-"
         isSecondNum = true
         isBeginNum = true
+        isCalAgain = true
+        isNeg = false
     }
     
     //get ready to add
@@ -169,40 +179,13 @@ class ViewController: UIViewController {
         operSymbol = "+"
         isSecondNum = true
         isBeginNum = true
+        isCalAgain = true
+        isNeg = false
     }
     
     //equals button has been pressed. Time to do the math
     @IBAction func doTheMath(sender: UIButton) {
-        //convert secondNumStr to float
-        let firstNum = (firstNumStr as NSString).floatValue
-        let secondNum = (secondNumStr as NSString).floatValue
-        var finalNum: float_t = 0
-        //do the math
-        if(operSymbol == "+"){
-            finalNum = firstNum + secondNum
-        }
-        else if(operSymbol == "-"){
-            finalNum = firstNum - secondNum
-        }
-        else if(operSymbol == "/"){
-            finalNum = firstNum / secondNum
-        }
-        else if(operSymbol == "*"){
-            finalNum = firstNum * secondNum
-        }
-        
-        //set label
-        mainLabel.text = String(finalNum)
-        
-        //reset bools
-        checkDec = false
-        isSecondNum = false
-        isBeginNum = true
-        isNeg = false
-        
-        //reset numbers just in case
-        firstNumStr = ""
-        secondNumStr = ""
+        equals()
     }
     
     //--------------------
@@ -219,18 +202,65 @@ class ViewController: UIViewController {
             }
             firstNumStr.append(appn)
             mainLabel.text = firstNumStr
-            }
+        }
         else{
             if(isBeginNum == true){
                 mainLabel.text = ""
             }
             secondNumStr.append(appn)
             mainLabel.text = secondNumStr
-            }
+        }
         
     }//end append function
     
     
+    //This is the function that will actually do the math
+    func equals(){
+        //convert secondNumStr to float
+        if(isSecondNum == true){
+            let firstNum = (firstNumStr as NSString).floatValue
+            let secondNum = (secondNumStr as NSString).floatValue
+            var finalNum: float_t = 0
+            //do the math
+            if(operSymbol == "+"){
+                finalNum = firstNum + secondNum
+            }
+            else if(operSymbol == "-"){
+                finalNum = firstNum - secondNum
+            }
+            else if(operSymbol == "/"){
+                finalNum = firstNum / secondNum
+            }
+            else if(operSymbol == "*"){
+                finalNum = firstNum * secondNum
+            }
+            
+            //set label
+            mainLabel.text = String(finalNum)
+            
+            //reset bools
+            checkDec = false
+            isSecondNum = false
+            isBeginNum = true
+            isNeg = false
+            
+            if(isCalAgain == false){
+                //reset numbers just in case
+                firstNumStr = ""
+                secondNumStr = ""
+            }
+            else{
+                //set first number to be last calc's final number and reset second num
+                firstNumStr = String(finalNum)
+                secondNumStr = ""
+                isCalAgain = false
+                //rawr
+            }
+        }
+        
+        
+        
+    }//end function equals
     
     
     
