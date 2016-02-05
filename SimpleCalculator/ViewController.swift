@@ -66,9 +66,13 @@ class ViewController: UIViewController {
             //remove the - from the number ==== not currently working =====
             if(isSecondNum == false){
                 firstNumStr = String(firstNumStr.characters.dropFirst())
+                mainLabel.text = firstNumStr
+                isNeg = false
             }
             else{
                 secondNumStr = String(secondNumStr.characters.dropFirst())
+                mainLabel.text = secondNumStr
+                isNeg = false
             }
         }
         else{
@@ -76,10 +80,12 @@ class ViewController: UIViewController {
             if(isSecondNum == false){
                 firstNumStr = "-" + firstNumStr
                 mainLabel.text = firstNumStr
+                isNeg = true
             }
             else{
                 secondNumStr = "-" + secondNumStr
                 mainLabel.text = secondNumStr
+                isNeg = true
             }
         }
     }
