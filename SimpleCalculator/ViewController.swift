@@ -240,7 +240,6 @@ class ViewController: UIViewController {
             
             //reset bools
             checkDec = false
-            isSecondNum = false
             isBeginNum = true
             isNeg = false
             
@@ -248,17 +247,16 @@ class ViewController: UIViewController {
                 //reset numbers just in case
                 firstNumStr = ""
                 secondNumStr = ""
+                isSecondNum = false
             }
             else{
                 //set first number to be last calc's final number and reset second num
                 firstNumStr = String(finalNum)
                 secondNumStr = ""
                 isCalAgain = false
-                //rawr
+                
             }
         }
-        
-        
         
     }//end function equals
     
